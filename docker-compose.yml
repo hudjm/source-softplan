@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    container_name: app-springboot-softplan
+    image: app-springboot-softplan
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=soft

@@ -36,6 +36,8 @@ public class AppUserDetailsService implements UserDetailsService {
         
         
         Usuario user = userService.find(username);
+        if (user == null)
+            return null;
         List<GrantedAuthority> authorities= Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
         return new BasicUser(user.getId(), user.getUsername(), user.getPassword(), authorities);
     }
