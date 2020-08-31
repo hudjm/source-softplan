@@ -95,6 +95,17 @@ public class HelperUtil {
             return false;
         }
     }
+    
+     public static String limparPontos(String text) {
+        String s = text;
+        
+        if (text == null || text.isEmpty())
+            return "";
+
+        s = s.replaceAll("\\.", "").replaceAll("\\(", "").replaceAll("\\)", "").replaceAll("-", "").
+                replaceAll(",", "").replaceAll("/", "").replaceAll(" ", "");
+        return s.trim();
+    }
 
    
     public static String limparAcentos(String str) {

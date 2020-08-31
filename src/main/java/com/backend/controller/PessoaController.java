@@ -58,7 +58,7 @@ public class PessoaController {
             pessoas.add(this.converterCadastroPessoaDto(lancamento));
         }
 
-        response.setData(pessoas);
+        response.setDados(pessoas);
         return ResponseEntity.ok(response);
     }
 
@@ -73,7 +73,7 @@ public class PessoaController {
             return ResponseEntity.badRequest().body(response);
         }
 
-        response.setData(this.converterCadastroPessoaDto(lancamento.get()));
+        response.setDados(this.converterCadastroPessoaDto(lancamento.get()));
         return ResponseEntity.ok(response);
     }
 
@@ -95,7 +95,7 @@ public class PessoaController {
         Pessoa pessoa = this.converterDtoParaPessoa(dto);
         pessoa = this.pessoaService.save(pessoa);
 
-        response.setData(new RetornoCadastro("Operação realizada com sucesso!", pessoa.getId()));
+        response.setDados(new RetornoCadastro("Operação realizada com sucesso!", pessoa.getId()));
         return ResponseEntity.ok(response);
     }
 
@@ -126,7 +126,7 @@ public class PessoaController {
         Pessoa pessoa = this.converterDtoParaPessoa(dto);
         pessoa = this.pessoaService.update(pessoa);
 
-        response.setData(new RetornoCadastro("Operação realizada com sucesso!", pessoa.getId()));
+        response.setDados(new RetornoCadastro("Operação realizada com sucesso!", pessoa.getId()));
         return ResponseEntity.ok(response);
     }
 
@@ -142,7 +142,7 @@ public class PessoaController {
         }
 
         this.pessoaService.delete(p1.get());
-        response.setData("Operação realizada com sucesso!");
+        response.setDados("Operação realizada com sucesso!");
         return ResponseEntity.ok(response);
     }
 
@@ -151,7 +151,7 @@ public class PessoaController {
             result.addError(new ObjectError("Pessoa", "Data de nascimento inválida"));
         }
 
-        if (dto.getCpf() == null || dto.getCpf().isEmpty() || !HelperUtil.ValidarCpfCnpj(dto.getCpf())) {
+        if (dto.getCpf() == null || dto.getCpf().isEmpty() || !HelperUtil.ValidarCpfCnpj(HelperUtil.limparPontos(dto.getCpf()))) {
             result.addError(new ObjectError("Pessoa", "CPF inválido"));
         } else {
             if (dto.getId() == 0) {
@@ -167,7 +167,7 @@ public class PessoaController {
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(dto.getNome());
         pessoa.setEmail(dto.getEmail());
-        pessoa.setCpf(dto.getCpf());
+        pessoa.setCpf(HelperUtil.limparPontos(dto.getCpf()));
         pessoa.setDataNascimento(dto.getDataNascimento());
         pessoa.setId(dto.getId());
         pessoa.setNacionalidade(dto.getNacionalidade());

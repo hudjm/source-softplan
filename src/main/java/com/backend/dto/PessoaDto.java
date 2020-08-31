@@ -24,7 +24,7 @@ public class PessoaDto {
     @NotEmpty(message = "Sexo não pode ser vazio.")
     private String sexo;
     
-    @NotNull
+    @NotNull(message = "Data de Nascimento não pode ser vazia.")
     @Past(message = "Data futura")
     private Date dataNascimento;
     

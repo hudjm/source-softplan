@@ -5,18 +5,18 @@ import java.util.List;
 
 public class Response<T> {
 
-    private T data;
+    private T dados;
     private List<String> errors;
 
     public Response() {
     }
 
-    public T getData() {
-        return data;
+    public T getDados() {
+        return dados;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setDados(T dados) {
+        this.dados = dados;
     }
 
     public List<String> getErrors() {

@@ -45,8 +45,10 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .authorizeRequests()
                 // ignorar requests nos caminhos
-                .antMatchers("auth").permitAll()
-                .anyRequest().fullyAuthenticated().and()             
+                .antMatchers("/auth/**", "/signup/**", "/v2/api-docs",
+                        "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**")
+                //.permitAll().anyRequest().fullyAuthenticated().and()             
+                .permitAll().anyRequest().authenticated().and()
                 .logout()
                 .permitAll()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
